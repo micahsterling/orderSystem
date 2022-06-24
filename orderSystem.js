@@ -14,10 +14,19 @@ readline.question(`What's your order? `, input => {
   
   function order(input) {
     let data = input.split(/[, ]+/).sort();
-    let meal = menu[data[data.length - 1]];
+    let meal = data[data.length - 1];
+    console.log(data);
+    if (data[0] === '') {
+      console.log("Unable to process: Order is missing");
+    } else if (meal === "Breakfast" || meal === "Lunch" || meal === "Dinner") {
+      console.log("meal accepted");
+     
+    } else {
+      console.log("Unable to process: Meal is missing");
+    }
     for (let i = 0;i < data.length - 1;i++) {
       // receipt += (menu[data[0]][data[i]]) + "," + " ";
-      receipt.push(meal[data[i]]);
+      receipt.push(menu[meal][data[i]]);
     }
   }
   readline.close();
