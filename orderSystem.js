@@ -20,7 +20,18 @@ readline.question(`What's your order? `, input => {
       console.log("Unable to process: Order is missing");
     } else if (meal === "Breakfast" || meal === "Lunch" || meal === "Dinner") {
       console.log("meal accepted");
-     
+      if (data[0] === "1") {
+        console.log("main is ordered");
+        if (data[1] === "2") {
+          console.log("side is ordered");
+        } else {
+          console.log("Unable to process: Side is missing");
+        }
+      } else if (data[0] !== "1" || data[0] !== "2") {
+        console.log("Unable to process: Main is missing, Side is missing");
+      } else {
+        console.log("Unable to process: Main is missing");
+      }
     } else {
       console.log("Unable to process: Meal is missing");
     }
