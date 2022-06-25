@@ -15,7 +15,10 @@ readline.question(`What's your order? `, input => {
   function order(input) {
     let data = input.split(/[, ]+/).sort();
     let meal = data[data.length - 1];
+    meal = meal[0].toUpperCase() + meal.substring(1);
     console.log(data);
+    console.log(meal);
+
     if (data[0] === '') {
       console.log("Unable to process: Order is missing");
     } else if (meal === "Breakfast" || meal === "Lunch" || meal === "Dinner") {
@@ -24,6 +27,13 @@ readline.question(`What's your order? `, input => {
         console.log("main is ordered");
         if (data[1] === "2") {
           console.log("side is ordered");
+          switch (meal) {
+          case "Breakfast":
+            receipt.push([menu[meal][data[0]]],menu[meal][data[1]]);
+            console.log(receipt);
+            breakfast(meal,data);
+            break;
+          }
         } else {
           console.log("Unable to process: Side is missing");
         }
@@ -35,18 +45,23 @@ readline.question(`What's your order? `, input => {
     } else {
       console.log("Unable to process: Meal is missing");
     }
-    for (let i = 0;i < data.length - 1;i++) {
-      // receipt += (menu[data[0]][data[i]]) + "," + " ";
-      receipt.push(menu[meal][data[i]]);
+  }
+
+  function breakfast(meal, data) {
+    let count = 0;
+    let item = '';
+    for (let i = 2;i < data.length - 1;i++) {
+      if (data[i] === '3') {
+        count += 1;
+        item = menu[meal][data[i]];
+      }
     }
+    count > 1 ? receipt.push(`${item}(${count})`) : receipt.push(item);
   }
   readline.close();
-// order(input);
-// console.log(receipt);
-
 });
 
-// Breakfast 3,1,2
+// Breakfast 3,1,2,3
 
 
 
