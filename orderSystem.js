@@ -37,6 +37,9 @@ readline.question(`What's your order? `, input => {
             receipt.push([menu[meal][data[0]]]);
             lunch(meal,data);
             break;
+          case "Dinner":
+            dinner(meal,data);
+            break;
           }
         } else {
           console.log("Unable to process: Side is missing");
@@ -62,6 +65,7 @@ readline.question(`What's your order? `, input => {
     }
     count > 1 ? receipt.push(`${item}(${count})`) : receipt.push(item);
   }
+  module.exports = breakfast;
 
   function lunch(meal,data) {
     let count = 0;
@@ -77,6 +81,21 @@ readline.question(`What's your order? `, input => {
     }
     count > 1 ? receipt.push(`${item}(${count})`) : receipt.push(item);
     drink === "" ?  receipt.push("Water") : receipt.push(drink);
+  }
+
+  function dinner(meal,data) {
+    if (data[3] === "4") {
+      for (let i = 0;i < data.length - 1;i++) {
+        if (data[i] === "3") {
+          receipt.push([menu[meal][data[i]]]);
+          receipt.push('Water');
+        } else {
+          receipt.push([menu[meal][data[i]]]);
+        }
+      }
+    } else {
+      console.log("Unable to process: Desert is missing");
+    }
   }
 
   readline.close();
