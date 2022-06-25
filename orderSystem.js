@@ -33,6 +33,10 @@ readline.question(`What's your order? `, input => {
             console.log(receipt);
             breakfast(meal,data);
             break;
+          case "Lunch":
+            receipt.push([menu[meal][data[0]]]);
+            lunch(meal,data);
+            break;
           }
         } else {
           console.log("Unable to process: Side is missing");
@@ -47,7 +51,7 @@ readline.question(`What's your order? `, input => {
     }
   }
 
-  function breakfast(meal, data) {
+  function breakfast(meal,data) {
     let count = 0;
     let item = '';
     for (let i = 2;i < data.length - 1;i++) {
@@ -58,6 +62,23 @@ readline.question(`What's your order? `, input => {
     }
     count > 1 ? receipt.push(`${item}(${count})`) : receipt.push(item);
   }
+
+  function lunch(meal,data) {
+    let count = 0;
+    let item = '';
+    let drink = '';
+    for (let i = 1;i < data.length - 1;i++) {
+      if (data[i] === '2') {
+        count += 1;
+        item = menu[meal][data[i]];
+      } else if (data[i] === '3') {
+        drink = menu[meal][data[i]];
+      }
+    }
+    count > 1 ? receipt.push(`${item}(${count})`) : receipt.push(item);
+    drink === "" ?  receipt.push("Water") : receipt.push(drink);
+  }
+
   readline.close();
 });
 
