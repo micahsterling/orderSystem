@@ -1,3 +1,4 @@
+// const { it } = require('jest-circus');
 const readline = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -15,11 +16,17 @@ readline.question(`What's your order? `, input => {
   function order(input) {
     let data = input.split(/[, ]+/).sort();
     let meal = data[data.length - 1];
-    meal = meal[0].toUpperCase() + meal.substring(1);
+    if (data[0] === '' ) {
+      data.shift();
+    }
+    if (data.length >= 1 && data[0] !== '') {
+      meal = meal[0].toUpperCase() + meal.substring(1);
+      console.log(meal);
+    }
     console.log(data);
     console.log(meal);
-
-    if (data[0] === '') {
+    
+    if (data[0] === '' || data.length === 0) {
       console.log("Unable to process: Order is missing");
     } else if (meal === "Breakfast" || meal === "Lunch" || meal === "Dinner") {
       console.log("meal accepted");
@@ -47,7 +54,7 @@ readline.question(`What's your order? `, input => {
       } else if (data[0] !== "1" || data[0] !== "2") {
         console.log("Unable to process: Main is missing, Side is missing");
       } else {
-        console.log("Unable to process: Main is missing");
+        console.error("Unable to process: Main is missing");
       }
     } else {
       console.log("Unable to process: Meal is missing");
@@ -61,11 +68,12 @@ readline.question(`What's your order? `, input => {
       if (data[i] === '3') {
         count += 1;
         item = menu[meal][data[i]];
-      }
+      } 
+
     }
+    item === '' ? item = "water" : '';
     count > 1 ? receipt.push(`${item}(${count})`) : receipt.push(item);
   }
-  module.exports = breakfast;
 
   function lunch(meal,data) {
     let count = 0;
