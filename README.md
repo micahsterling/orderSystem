@@ -1,6 +1,9 @@
 # orderSystem
-Run npm install to download dependencies 
+To download dependencies: 
+npm install
 
-Run File with node orderSystem.js
+Run File:
+node orderSystem.js
 
-Test with npm test
+Test:
+npm test
