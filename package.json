@@ -1,0 +1,23 @@
+{
+  "name": "ordersystem",
+  "version": "1.0.0",
+  "description": "menu order system",
+  "main": "orderSystem.js",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^28.1.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micahsterling/orderSystem.git"
+  },
+  "author": "micah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/micahsterling/orderSystem/issues"
+  },
+  "homepage": "https://github.com/micahsterling/orderSystem#readme"
+}
